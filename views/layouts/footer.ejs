@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimond</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #5ba9f7;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* Main content area */
+        .content {
+            flex: 1;
+            padding-top: 60px; /* Space for fixed header */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .f-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .f-info-socials {
+            margin-bottom: 10px;
+            display: flex; /* Changed to flex for alignment */
+            justify-content: center; /* Center social icons */
+        }
+
+        .f-info-socials a {
+            margin: 0 10px;
+            font-size: 24px;
+            color: white; /* Default color */
+            transition: color 0.3s;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .f-info-socials a:hover {
+            color: #06dbdb; /* Hover color */
+        }
+
+        .f-info-brands {
+            margin: 10px 0;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .f-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .f-info-socials {
+                flex-direction: row;
+                justify-content: center; /* Ensure icons are centered */
+            }
+
+            .f-info-socials a {
+                font-size: 20px; /* Adjust icon size for smaller screens */
+            }
+
+            .f-info-brands {
+                font-size: 14px; /* Adjust text size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="content">
+        <!-- Main content goes here -->
+    </div>
+
+    <footer>
+        <div class="f-info">
+            <div class="f-info-socials">
+                <a href="https://www.facebook.com/chandresh.boghara.3?mibextid=ZbWKwL" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/cv_boghara?igsh=MXFsNGpnODRvdGVlZQ==" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/chandresh-boghara-1884b926b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="f-info-brands">&copy; Boghara Management Pvt Limited</div>
+        </div>
+    </footer>
+</body>
+</html>

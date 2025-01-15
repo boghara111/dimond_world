@@ -1,0 +1,112 @@
+/* Common styles */
+body {
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height of the viewport */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px; /* Adjusted to keep it consistent */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+/* edit form center */
+.flex{
+    display: flex;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center form contents */
+    width: 100%; /* Full width of the viewport */
+    max-width: 800px; /* Max width for better readability */
+    border: 1px solid #ccc; /* Border around the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%; /* Full width of the form */
+    margin: 20px 0; /* Space between tables */
+    border: 1px solid black;    
+}
+
+.fullborder {
+    border-collapse: collapse; /* Combine borders */
+    width: 100%; /* Optional: make the table full width */
+}
+
+.fullborder th,
+.fullborder td {
+    border: 1px solid black; /* Set border for header and data cells */
+    padding: 2px; /* Add padding */
+    text-align: center; /* Align text to the left */
+}
+
+.fullborder th {
+    background-color: white; /* Optional: background color for the header */
+}
+
+
+
+td {
+    background-color: white; /* Light background for table cells */
+    color: black;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%; /* Full width of the cell */
+    border: 1px solid #ccc; /* Add border for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+    padding: 0px; /* Padding for inputs */
+    text-align: center; /* Center text */
+    margin: 0;
+}
+
+input[readonly] {
+    background-color: #71d6d6; /* Light background for readonly inputs */
+    border: none; /* Remove border for readonly inputs */
+}
+
+button {
+    padding: 5px 10px; /* Button padding */
+    font-size: 1rem; /* Button font size */
+    color: black; /*White text/*
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 2px auto; /* Space above button */
+}
+
+button:hover {
+    background-color: #12e6e6; /*Darker blue on hover*/
+}
+
+/* Specific styles */
+.readonly {
+    background-color: #71d6d6; /* Header background color */
+    color: white; /* Header text color */
+}
+
+.info-row {
+    background-color: #71d6d6; /* Light cyan background */
+    color: white; /* Dark cyan text */
+}
+
+p{
+    text-align: center;
+    color: green;
+}
+
+a{
+    text-decoration: none;
+}
+@media (max-width: 600px) {
+    th, td {
+        font-size: 0.9rem; /* Smaller font on mobile */
+    }
+
+    button {
+        font-size: 0.8rem; /* Smaller button text on mobile */
+    }
+}

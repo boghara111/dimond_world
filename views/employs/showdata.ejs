@@ -1,0 +1,142 @@
+<% layout("/layouts/boilerplate") -%>
+
+<body>
+    <table class="fullborder">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>Dimond</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            // Sort the listings array by the 'no' field in ascending order
+            allListings.sort((a, b) => a.no - b.no); // Adjust if 'no' is a string or use other sorting criteria
+
+            
+            let totalA = 0, totalB = 0, totalC = 0, totalD = 0, totalE = 0; 
+            for (let listing of allListings) { 
+                let sumA = 0, sumB = 0, sumC = 0, sumD = 0, sumE = 0;
+            %>
+                <tr>
+                    <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
+                    <td><%= listing.no %></td>
+                    <td><%= listing.name %></td>
+                    <td>
+                        <% 
+                        for (let j = 1; j <= 33; j++) { 
+                            sumA += listing[`A${j}`] || 0; 
+                        } 
+                        %>
+                        <%= sumA %>    
+                    </td>
+                    <td>
+                        <% 
+                        for (let j = 1; j <= 33; j++) { 
+                            sumB += listing[`B${j}`] || 0; 
+                        } 
+                        %>
+                        <%= sumB %>    
+                    </td>
+                    <td>
+                        <% 
+                        for (let j = 1; j <= 33; j++) { 
+                            sumC += listing[`C${j}`] || 0; 
+                        } 
+                        %>
+                        <%= sumC %>    
+                    </td>
+                    <td>
+                        <% 
+                        for (let j = 1; j <= 33; j++) { 
+                            sumD += listing[`D${j}`] || 0; 
+                        } 
+                        %>
+                        <%= sumD %>    
+                    </td>
+                    <td>
+                        <% 
+                        for (let j = 1; j <= 33; j++) { 
+                            sumE += listing[`E${j}`] || 0; 
+                        } 
+                        %>
+                        <%= sumE %>    
+                    </td>
+                    <td>
+                        <%= sumA + sumB + sumC + sumD + sumE %>
+                    </td>
+                    <td>
+                        <% 
+                        let salary = 0;
+                        const userPrice = allPrices.find(price => currUser && currUser._id.equals(price.owner._id));
+                        
+                        if (userPrice) {
+                            salary = sumA * userPrice.price1 + sumB * userPrice.price2 + sumC * userPrice.price3 + sumD * userPrice.price4 + sumE * userPrice.price5;
+                            %>
+                            <%= salary %>
+                        <% } else { %>
+                            No price data available.
+                        <% } %>
+                        
+                    </td>
+                    <% } %>
+                </tr>
+                <% 
+                totalA += sumA;
+                totalB += sumB;
+                totalC += sumC;
+                totalD += sumD;
+                totalE += sumE;
+            } 
+            %>
+            <tr>
+                <td colspan="2">Total</td>
+                <td><%= totalA %></td>
+                <td><%= totalB %></td>
+                <td><%= totalC %></td>
+                <td><%= totalD %></td>
+                <td><%= totalE %></td>
+                <td><%= totalA + totalB + totalC + totalD + totalE %></td>
+                <td>
+                    <% 
+                        let totalSalary = 0;
+            
+                        // Check if allPrices is defined and has at least one price
+                        if (allPrices && allPrices.length > 0) {
+                            // Find the price for the current user
+                            const userPrice = allPrices.find(price => currUser && currUser._id.equals(price.owner._id));
+                            
+                            // Calculate total salary if a price is found
+                            if (userPrice) {
+                                totalSalary = (totalA * userPrice.price1) +
+                                              (totalB * userPrice.price2) +
+                                              (totalC * userPrice.price3) +
+                                              (totalD * userPrice.price4) +
+                                              (totalE * userPrice.price5);
+                            } 
+                        }
+            
+                        // Output the total salary or a message if no data is available
+                        if (totalSalary > 0) {
+                            %>
+                            <%= totalSalary %>
+                            <%
+                        } else {
+                            %>
+                            No price data available.
+                            <%
+                        }
+                    %>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</body>

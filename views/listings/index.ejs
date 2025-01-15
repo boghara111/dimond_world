@@ -1,0 +1,64 @@
+<% layout("/layouts/boilerplate") -%>
+
+<body>  
+    <table>
+        <tr>
+            <td>
+                <form action="/listings/new" method="GET">
+                    <button>Create New Employ</button>
+                </form>
+            </td>   
+            <td>
+                <form action="/prices" method="GET">
+                    <button>Price</button>
+                </form>
+            </td>
+            <td>
+                <form action="/employs" method="GET">
+                    <button>Employ</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <table  class="fullborder">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Dimond Work Management</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                // Sort the listings array by the 'no' field in ascending order
+                allListings.sort((a, b) => a.no - b.no); // Or use a.localeCompare if 'no' is a string
+            %>
+
+            <% if (allListings && allListings.length > 0) { %>
+                <% for (let listing of allListings) { %>
+                    <tr>
+                        <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
+                        <td><%= listing.no %></td>
+                        <td><%= listing.name %></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/listings/<%= listing._id %>'">Show</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/listings/<%= listing._id %>/edit'">Edit</button>
+
+                            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline;">
+                                <button type="submit" class="btn btn-primary" onclick="confirmDelete(event)">Delete</button>
+                            </form>
+                        </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="3">No listings available.</td>
+                </tr>
+            <% } %>
+        </tbody>
+
+    </table>
+    <script src="/listing_price.js"></script>
+</body>
+

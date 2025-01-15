@@ -1,0 +1,27 @@
+<% layout("/layouts/boilerplate") -%>
+
+<body>
+    <form action="/prices" method="POST">
+        <table>
+            <thead>
+                <tr class="readonly">
+                    <th><input type="text" value="A" readonly></th>
+                    <th><input type="text" value="B" readonly></th>
+                    <th><input type="text" value="C" readonly></th>
+                    <th><input type="text" value="D" readonly></th>
+                    <th><input type="text" value="E" readonly></th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><input type="number" name="price[price1]"></td>
+                        <td><input type="number" name="price[price2]"></td>
+                        <td><input type="number" name="price[price3]"></td>
+                        <td><input type="number" name="price[price4]"></td>
+                        <td><input type="number" name="price[price5]"></td>
+                    </tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</body>

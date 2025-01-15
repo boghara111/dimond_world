@@ -1,0 +1,35 @@
+<% layout("/layouts/boilerplate") -%>
+
+<body>
+    <table class="fullborder">
+        <tr>
+            <th>NO: <%= listing['no'] %></th>
+            <th>Name: <%= listing['name'] %></th>
+            <th>Owner: <%= listing.owner ? listing.owner.username : 'Unknown' %></th>
+        </tr>
+    </table>
+    <table class="fullborder">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>--A--</th>
+                <th>--B--</th>
+                <th>--C--</th>
+                <th>--D--</th>
+                <th>--E--</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 1; i <= 33; i++) { %>
+                <tr>
+                    <td><%= i %></td>
+                    <td><%= listing[`A${i}`] %></td>
+                    <td><%= listing[`B${i}`] %></td>
+                    <td><%= listing[`C${i}`] %></td>
+                    <td><%= listing[`D${i}`] %></td>
+                    <td><%= listing[`E${i}`] %></td>
+                </tr>
+            <% } %>
+        </tbody> 
+    </table>    
+</body>

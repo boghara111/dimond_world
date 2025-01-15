@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") -%>
+
+<body>
+    <table class="fullborder">
+        <thead>
+            <tr>
+            <% if (currUser) { %>
+                <% const existingPrice = allPrices.find(price => price.owner._id.equals(currUser._id)); %>
+                <% if (existingPrice) { %>
+                    <p>You have already created a Price. You cannot create another one.</p>
+                <% } else { %>
+                    <form action="/prices/newprice" method="GET">
+                        <button type="submit">Create New Price</button>
+                    </form>
+                <% } %>
+            <% } else { %>
+                <p>Please log in to create a price.</p>
+            <% } %>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% allPrices.forEach(price => { %>
+                <tr>
+                    <% if (currUser && currUser._id.equals(price.owner._id)) { %>
+                    <td><%= price.price1 %></td>
+                    <td><%= price.price2 %></td>
+                    <td><%= price.price3 %></td>
+                    <td><%= price.price4 %></td>
+                    <td><%= price.price5 %></td>
+                    <td>                        
+                        <button onclick="location.href='/prices/<%= price._id %>'">Show</button>
+                        <button onclick="location.href='/prices/<%= price._id %>/priceedit'">Edit</button>
+                        <form method="POST" action="/prices/<%= price._id %>?_method=DELETE" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this price?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <% } %>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+
