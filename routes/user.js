@@ -30,15 +30,6 @@ router.get("/login",(req,res) => {
     res.render("user/login.ejs");
 });
 
-
-// router.post("/login",
-//     passport.authenticate("local",{ 
-//         failureRedirect: "/login"
-//     }),
-//     async(req,res) => {
-//         res.redirect("/listings");
-//     }
-// );
 router.post("/login",
     saveRedirectUrl,
     passport.authenticate("local",{ 

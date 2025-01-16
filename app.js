@@ -61,13 +61,10 @@ app.use((req,res,next) => {
     next();
 });
 
-// I will have take leave 17jan,3,4,20,21 feb because my family marraige
 // router files
 const listingRouter = require("./routes/listing.js");
 const priceRouter = require("./routes/price.js");
 const employRouter = require("./routes/employ.js");
-
-
 
 const indexRouter = require("./routes/index.js");
 const userRouter = require("./routes/user.js");
@@ -97,7 +94,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+
 app.engine('ejs',ejsMate);//boilerplate
+
+
+// Serve static files (optional, for CSS, images, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Use session to store data (if needed)
+app.use(session({ secret: 'your_secret', resave: false, saveUninitialized: true }));
 
 
 app.use("/listings",listingRouter);
@@ -105,10 +111,23 @@ app.use("/prices",priceRouter);
 app.use("/employs",employRouter);
 app.use("/home",indexRouter);
 app.use("/",userRouter);
+app.use("/employs", employRouter);
+
+
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store');
     next();
+});
+
+// Node.js Route for Rendering Table
+app.get('/table', (req, res) => {
+  // Example of sending data to the template
+  res.render('index', {
+      allListings: listings,    // data for the table
+      currUser: currentUser,    // current user data
+      allPrices: prices         // price data
+  });
 });
 
 

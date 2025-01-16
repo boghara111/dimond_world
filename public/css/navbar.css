@@ -1,0 +1,89 @@
+
+    body {
+        margin: 0;
+        padding-top: 60px;
+        background-color: #888787;
+    }
+
+    .hea-web {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #333333;
+        color: white;
+        border-bottom: 1px solid #ccc;
+        z-index: 1000;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    h1 a {
+        font-size: 24px;
+        color: white;
+        text-decoration: none;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    nav ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style-type: none;
+        transition: transform 0.3s ease;
+    }
+
+    nav li {
+        margin-right: 15px;
+        position: relative;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    nav a:hover {
+        color: #06dbdb;
+    }
+
+    .menu-icon {
+        display: none;
+        cursor: pointer;
+        padding: 20px;
+        font-size: 24px;
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+            display: none;
+        }
+
+        nav ul.active {
+            display: flex;
+        }
+
+        .menu-icon {
+            display: flex;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 a {
+            font-size: 20px;
+        }
+
+        nav a {
+            font-size: 14px;
+        }
+    }

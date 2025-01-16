@@ -1,6 +1,45 @@
-<% layout("/layouts/boilerplate") -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table to Excel and PDF</title>
 
-<body>
+    <!-- Include SheetJS (xlsx) library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+    
+    <!-- Include jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Include jsPDF AutoTable Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .fullborder {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .fullborder th, .fullborder td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="m-2">
+
+    <!-- Buttons for exporting to Excel and PDF -->
+    <div class="d-flex justify-content-center align-items-center gap-2">
+        <button id="export-btn-excel" class="btn btn-dark text-light mb-1">Export to Excel</button>
+        <button id="export-btn-pdf" class="btn btn-dark text-light mb-1">Export to PDF</button>
+    </div>
+    
+    
+    <!-- Table with the data -->
     <table class="fullborder">
         <thead>
             <tr>
@@ -16,11 +55,9 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Loop through allListings and display the data dynamically -->
             <% 
-            // Sort the listings array by the 'no' field in ascending order
-            allListings.sort((a, b) => a.no - b.no); // Adjust if 'no' is a string or use other sorting criteria
-
-            
+            allListings.sort((a, b) => a.no - b.no); 
             let totalA = 0, totalB = 0, totalC = 0, totalD = 0, totalE = 0; 
             for (let listing of allListings) { 
                 let sumA = 0, sumB = 0, sumC = 0, sumD = 0, sumE = 0;
@@ -84,7 +121,6 @@
                         <% } else { %>
                             No price data available.
                         <% } %>
-                        
                     </td>
                     <% } %>
                 </tr>
@@ -107,13 +143,9 @@
                 <td>
                     <% 
                         let totalSalary = 0;
-            
-                        // Check if allPrices is defined and has at least one price
                         if (allPrices && allPrices.length > 0) {
-                            // Find the price for the current user
                             const userPrice = allPrices.find(price => currUser && currUser._id.equals(price.owner._id));
                             
-                            // Calculate total salary if a price is found
                             if (userPrice) {
                                 totalSalary = (totalA * userPrice.price1) +
                                               (totalB * userPrice.price2) +
@@ -122,8 +154,6 @@
                                               (totalE * userPrice.price5);
                             } 
                         }
-            
-                        // Output the total salary or a message if no data is available
                         if (totalSalary > 0) {
                             %>
                             <%= totalSalary %>
@@ -136,7 +166,61 @@
                     %>
                 </td>
             </tr>
-            
         </tbody>
     </table>
+
+    <!-- Export to Excel functionality -->
+    <script>
+        document.getElementById("export-btn-excel").addEventListener("click", function() {
+            const table = document.querySelector("table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+            XLSX.writeFile(wb, "table_data.xlsx");
+        });
+    </script>
+
+    <!-- Export to PDF functionality with custom styles -->
+    <script>
+        document.getElementById("export-btn-pdf").addEventListener("click", function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: 'landscape' 
+        });
+
+        // Custom styles for table in PDF
+        doc.autoTable({
+            html: 'table',
+            styles: {
+                font: 'helvetica',
+                fontSize: 10,
+                lineColor: [0, 0, 0],
+                lineWidth: 0.5, 
+                cellPadding: 4, 
+                halign: 'center',
+                valign: 'middle'
+            },
+            headStyles: {
+                fillColor: [255, 255, 255], 
+                textColor: [0, 0, 0],
+                fontSize: 12,
+                fontStyle: 'bold'
+            },
+            bodyStyles: {
+                fillColor: [255, 255, 255],
+                textColor: [0, 0, 0] 
+            },
+            theme: 'grid' 
+        });
+
+        // Get the current month (January is 0, December is 11)
+        const date = new Date();
+        const month = date.toLocaleString('default', { month: 'long' });
+        
+        const fileName = `dimond_${month}.pdf`;
+
+        doc.save(fileName);
+        });
+
+    </script>
+
 </body>
+</html>

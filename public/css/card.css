@@ -1,0 +1,43 @@
+.card-group {
+    gap: 20px;
+}
+
+.card {
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card:hover .card-title {
+    color: #6a11cb;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+
+
