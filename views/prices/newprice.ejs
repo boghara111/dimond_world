@@ -1,27 +1,34 @@
+<!-- views/prices/new.ejs -->
 <% layout("/layouts/boilerplate") -%>
 
 <body>
+    <h1>Add New Prices</h1>
     <form action="/prices" method="POST">
+        <label for="month">Month:</label>
+        <select name="month" id="month" required>
+            <option value="">Select Month</option>
+            <% ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].forEach(month => { %>
+                <option value="<%= month %>"><%= month %></option>
+            <% }); %>
+        </select>
+
         <table>
-            <thead>
-                <tr class="readonly">
-                    <th><input type="text" value="A" readonly></th>
-                    <th><input type="text" value="B" readonly></th>
-                    <th><input type="text" value="C" readonly></th>
-                    <th><input type="text" value="D" readonly></th>
-                    <th><input type="text" value="E" readonly></th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <td><input type="number" name="price[price1]"></td>
-                        <td><input type="number" name="price[price2]"></td>
-                        <td><input type="number" name="price[price3]"></td>
-                        <td><input type="number" name="price[price4]"></td>
-                        <td><input type="number" name="price[price5]"></td>
-                    </tr>
-            </tbody>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="price1" value="0"></td>
+                <td><input type="number" name="price2" value="0"></td>
+                <td><input type="number" name="price3" value="0"></td>
+                <td><input type="number" name="price4" value="0"></td>
+                <td><input type="number" name="price5" value="0"></td>
+            </tr>
         </table>
-        <button type="submit">Submit</button>
+
+        <button type="submit">Save Prices</button>
     </form>
 </body>

@@ -31,6 +31,25 @@
     </style>
 </head>
 <body class="m-2">
+<!-- Dropdown to select a month -->
+<form method="GET" action="/employs">
+    <label for="monthDropdown">Select Month:</label>
+    <select name="month" id="monthDropdown" onchange="this.form.submit()">
+        <option value="">All Months</option>
+        <option value="January" <%= selectedMonth === 'January' ? 'selected' : '' %>>January</option>
+        <option value="February" <%= selectedMonth === 'February' ? 'selected' : '' %>>February</option>
+        <option value="March" <%= selectedMonth === 'March' ? 'selected' : '' %>>March</option>
+        <option value="April" <%= selectedMonth === 'April' ? 'selected' : '' %>>April</option>
+        <option value="May" <%= selectedMonth === 'May' ? 'selected' : '' %>>May</option>
+        <option value="June" <%= selectedMonth === 'June' ? 'selected' : '' %>>June</option>
+        <option value="July" <%= selectedMonth === 'July' ? 'selected' : '' %>>July</option>
+        <option value="August" <%= selectedMonth === 'August' ? 'selected' : '' %>>August</option>
+        <option value="September" <%= selectedMonth === 'September' ? 'selected' : '' %>>September</option>
+        <option value="October" <%= selectedMonth === 'October' ? 'selected' : '' %>>October</option>
+        <option value="November" <%= selectedMonth === 'November' ? 'selected' : '' %>>November</option>
+        <option value="December" <%= selectedMonth === 'December' ? 'selected' : '' %>>December</option>
+    </select>
+</form>
 
     <!-- Buttons for exporting to Excel and PDF -->
     <div class="d-flex justify-content-center align-items-center gap-2">
@@ -44,6 +63,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Bank</th>
                 <th>Name</th>
                 <th>A</th>
                 <th>B</th>
@@ -65,6 +85,7 @@
                 <tr>
                     <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
                     <td><%= listing.no %></td>
+                    <td><%= listing.bank %></td>
                     <td><%= listing.name %></td>
                     <td>
                         <% 
@@ -133,7 +154,9 @@
             } 
             %>
             <tr>
-                <td colspan="2">Total</td>
+                <td>Total</td>
+                <td></td>
+                <td></td>
                 <td><%= totalA %></td>
                 <td><%= totalB %></td>
                 <td><%= totalC %></td>

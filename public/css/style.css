@@ -64,7 +64,8 @@ input[type="text"], input[type="number"] {
 }
 
 input[readonly] {
-    background-color: #71d6d6; /* Light background for readonly inputs */
+    background-color: #9b9b9b; /* Light background for readonly inputs */
+    color: black;
     border: none; /* Remove border for readonly inputs */
 }
 
@@ -79,12 +80,13 @@ button {
 }
 
 button:hover {
-    background-color: #12e6e6; /*Darker blue on hover*/
+    background-color: #000000; /*Darker blue on hover*/
+    color: white;
 }
 
 /* Specific styles */
 .readonly {
-    background-color: #71d6d6; /* Header background color */
+    background-color: #ffffff; /* Header background color */
     color: white; /* Header text color */
 }
 

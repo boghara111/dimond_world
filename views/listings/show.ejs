@@ -3,9 +3,10 @@
 <body>
     <table class="fullborder">
         <tr>
-            <th>NO: <%= listing['no'] %></th>
-            <th>Name: <%= listing['name'] %></th>
-            <th>Owner: <%= listing.owner ? listing.owner.username : 'Unknown' %></th>
+            <th colspan="1">No: <%= listing['no'] %></th>
+            <th colspan="1">Bank: <%= listing['bank'] %></th>
+            <th colspan="2">Name: <%= listing['name'] %></th>
+            <th colspan="2">Owner: <%= listing.owner ? listing.owner.username : 'Unknown' %></th>
         </tr>
     </table>
     <table class="fullborder">

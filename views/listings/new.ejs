@@ -2,6 +2,23 @@
 
 <body class="flex">
     <form action="/listings" method="POST">
+        
+        <label for="month">Month:</label>
+        <select name="listing[month]" id="monthDropdown" required>
+            <option value="" disabled selected>Select Month</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
         <table>
             <thead>
                 <tr class="fullborder">
@@ -10,8 +27,9 @@
                     </td>
                 </tr>
                 <tr class="info-row">
-                    <td colspan="3">No: <input name="listing[no]" placeholder="Enter Number" type="number" required></td>
-                    <td colspan="3">Name: <input name="listing[name]" placeholder="Enter Name" type="text" required></td>
+                    <td colspan="2">No<input name="listing[no]" placeholder="Enter Number" type="number" required></td>
+                    <td colspan="2">Bank<input name="listing[bank]" placeholder="Bank detail..." type="number" required></td>
+                    <td colspan="2">Name<input name="listing[name]" placeholder="Enter Name" type="text" required></td>
                 </tr>
                 <tr class="readonly">
                     <th><input type="text" value="Day" readonly></th>

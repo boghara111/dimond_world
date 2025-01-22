@@ -18,13 +18,35 @@
                 <form action="/employs" method="GET">
                     <button>Employ</button>
                 </form>
+            </td>  
+            <td>
+                <form method="GET" action="/listings">
+                    <label for="monthDropdown">Select Month:</label>
+                    <select name="month" id="monthDropdown" onchange="this.form.submit()">
+                        <option value="" <%= !selectedMonth ? 'selected' : '' %>>All Months</option>
+                        <option value="January" <%= selectedMonth === 'January' ? 'selected' : '' %>>January</option>
+                        <option value="February" <%= selectedMonth === 'February' ? 'selected' : '' %>>February</option>
+                        <option value="March" <%= selectedMonth === 'March' ? 'selected' : '' %>>March</option>
+                        <option value="April" <%= selectedMonth === 'April' ? 'selected' : '' %>>April</option>
+                        <option value="May" <%= selectedMonth === 'May' ? 'selected' : '' %>>May</option>
+                        <option value="June" <%= selectedMonth === 'June' ? 'selected' : '' %>>June</option>
+                        <option value="July" <%= selectedMonth === 'July' ? 'selected' : '' %>>July</option>
+                        <option value="August" <%= selectedMonth === 'August' ? 'selected' : '' %>>August</option>
+                        <option value="September" <%= selectedMonth === 'September' ? 'selected' : '' %>>September</option>
+                        <option value="October" <%= selectedMonth === 'October' ? 'selected' : '' %>>October</option>
+                        <option value="November" <%= selectedMonth === 'November' ? 'selected' : '' %>>November</option>
+                        <option value="December" <%= selectedMonth === 'December' ? 'selected' : '' %>>December</option>
+                    </select>
+                </form>
             </td>
+             
         </tr>
     </table>
     <table  class="fullborder">
         <thead>
             <tr>
                 <th>No</th>
+                <th>Bank</th>
                 <th>Name</th>
                 <th>Dimond Work Management</th>
             </tr>
@@ -40,13 +62,14 @@
                     <tr>
                         <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
                         <td><%= listing.no %></td>
+                        <td><%= listing.bank %></td>
                         <td><%= listing.name %></td>
                         <td>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='/listings/<%= listing._id %>'">Show</button>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='/listings/<%= listing._id %>/edit'">Edit</button>
+                            <button type="button" class="btn btn-dark" onclick="window.location.href='/listings/<%= listing._id %>'">Show</button>
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='/listings/<%= listing._id %>/edit'">Edit</button>
 
                             <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline;">
-                                <button type="submit" class="btn btn-primary" onclick="confirmDelete(event)">Delete</button>
+                                <button type="submit" class="btn btn-dark" onclick="confirmDelete(event)">Delete</button>
                             </form>
                         </td>
                         <% } %>

@@ -1,64 +1,62 @@
-const express = require("express");
+// routes/price.js
+const express = require('express');
 const router = express.Router();
-const { Price, Listing } = require("../models/listing");
-const {isLoggedIn} = require("../middleware.js");
+const Price = require('../models/listing');
+const isLoggedIn = require('../middleware/isLoggedIn');  // Make sure to define isLoggedIn middleware
 
-
-//  Function to sum values
-const sumValues = (values) => values.reduce((acc, curr) => acc + curr, 0);
-
-// Index Route
-router.get("/", isLoggedIn,async (req, res) => {
-    const allPrices = await Price.find({});
-    res.render("prices/price.ejs", { allPrices});
+// Route to show all prices for a specific user
+router.get('/', isLoggedIn, async (req, res) => {
+    const allPrices = await Price.find({ owner: req.user._id });
+    res.render('prices/show', { allPrices });
 });
 
-// New Route
-
-router.get('/newprice',isLoggedIn, (req, res) => {
-    res.render('prices/newprice.ejs');        
+// Route to show the form for adding/editing prices
+router.get('/new', isLoggedIn, (req, res) => {
+    res.render('prices/new');
 });
 
-// Show Route
+// Route to handle saving new or updated prices
+router.post('/', isLoggedIn, async (req, res) => {
+    const { month, price1, price2, price3, price4, price5 } = req.body;
 
-router.get("/:id",isLoggedIn, async (req, res) => {
-    let { id } = req.params;
-    // const price = await Price.findById(id);
-    const price = await Price.findById(id).populate('owner');
-    console.log(price);
-    res.render("prices/priceshow.ejs", { price });
+    // Check if prices already exist for the selected month
+    const existingPrice = await Price.findOne({ month: month, owner: req.user._id });
+
+    if (existingPrice) {
+        // If prices already exist, update them
+        existingPrice.price1 = price1;
+        existingPrice.price2 = price2;
+        existingPrice.price3 = price3;
+        existingPrice.price4 = price4;
+        existingPrice.price5 = price5;
+        await existingPrice.save();
+    } else {
+        // Otherwise, create new price entry
+        const newPrice = new Price({
+            month: month,
+            price1: price1,
+            price2: price2,
+            price3: price3,
+            price4: price4,
+            price5: price5,
+            owner: req.user._id
+        });
+        await newPrice.save();
+    }
+
+    res.redirect('/prices');
 });
 
-// Create Route
-
-router.post("/", isLoggedIn,async (req, res) => {
-    const newPrice = new Price(req.body.price);
-    newPrice.owner = req.user._id;
-    await newPrice.save();
-    res.redirect("/prices");
+// Route to edit a specific month's prices
+router.get('/:id/edit', isLoggedIn, async (req, res) => {
+    const price = await Price.findById(req.params.id);
+    res.render('prices/edit', { price });
 });
 
-// Edit Route
-
-router.get("/:id/priceedit", isLoggedIn,async (req, res) => {
-    let { id } = req.params;
-    const price = await Price.findById(id);
-    res.render("prices/priceedit.ejs", { price });
+// Route to handle deleting prices
+router.delete('/:id', isLoggedIn, async (req, res) => {
+    await Price.findByIdAndDelete(req.params.id);
+    res.redirect('/prices');
 });
 
-// Update Route
-
-router.put("/:id", isLoggedIn,async (req, res) => {
-    let { id } = req.params;
-    await Price.findByIdAndUpdate(id, { ...req.body.price });
-    res.redirect(`/listings`);
-});
-
-// Delete Route
-router.delete("/:id", isLoggedIn,async (req, res) => {
-    let { id } = req.params;
-    let deletedPrice = await Price.findByIdAndDelete(id);
-    console.log(deletedPrice);
-    res.redirect("/prices");
-});
 module.exports = router;

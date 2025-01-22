@@ -5,9 +5,13 @@ const {isLoggedIn} = require("../middleware.js");
 
 
 // Index Route
-router.get("/",isLoggedIn,async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
+router.get("/", isLoggedIn, async (req, res) => {
+    const { month } = req.query; // Get month from query params
+    const allListings = month 
+        ? await Listing.find({ month }) // Filter by selected month
+        : await Listing.find(); // Get all if no month is selected
+
+    res.render("listings/index.ejs", { allListings, selectedMonth: month || "" });
 });
 
 // show in home management

@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Price Schema
-const dimondPrice = new Schema({
-    price1: Number,
-    price2: Number,
-    price3: Number,
-    price4: Number,
-    price5: Number,
+const priceSchema = new mongoose.Schema({
+    month: { type: String, required: true },
+    price1: { type: Number, default: 0 },
+    price2: { type: Number, default: 0 },
+    price3: { type: Number, default: 0 },
+    price4: { type: Number, default: 0 },
+    price5: { type: Number, default: 0 },
 
     owner: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Associate with user
 });
@@ -16,6 +17,8 @@ const dimondPrice = new Schema({
 // Listing Schema
 const listingSchema = new Schema({
     no: Number,
+    bank:Number,
+    month: String,
     name: {
         type: String,
         required: true,
@@ -48,7 +51,7 @@ const listingSchema = new Schema({
 
 
 // Create models
-const Price = mongoose.model("Price", dimondPrice);
+const Price = mongoose.model("Price", priceSchema);
 const Listing = mongoose.model("Listing", listingSchema);
 
 // Export both models

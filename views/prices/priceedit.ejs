@@ -1,33 +1,28 @@
+<!-- views/prices/edit.ejs -->
 <% layout("/layouts/boilerplate") -%>
 
-<body class="flex">
-    <form method="POST" action="/prices/<%= price._id %>?_method=PUT">
+<body>
+    <h1>Edit Prices for <%= price.month %></h1>
+    <form action="/prices/<%= price._id %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+
         <table>
-            <thead>
-                <tr class="fullborder">
-                    <td colspan="6">
-                        <button type="submit">Update</button>
-                        <button type="button" onclick="clearForm()">Clear</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th><input type="text" value="A" readonly></th>
-                    <th><input type="text" value="B" readonly></th>
-                    <th><input type="text" value="C" readonly></th>
-                    <th><input type="text" value="D" readonly></th>
-                    <th><input type="text" value="E" readonly></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="number" name="price[price1]" value="<%= price.price1 %>"></td>
-                    <td><input type="number" name="price[price2]" value="<%= price.price2 %>"></td>
-                    <td><input type="number" name="price[price3]" value="<%= price.price3 %>"></td>
-                    <td><input type="number" name="price[price4]" value="<%= price.price4 %>"></td>
-                    <td><input type="number" name="price[price5]" value="<%= price.price5 %>"></td>
-                </tr>
-            </tbody>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="price1" value="<%= price.price1 %>"></td>
+                <td><input type="number" name="price2" value="<%= price.price2 %>"></td>
+                <td><input type="number" name="price3" value="<%= price.price3 %>"></td>
+                <td><input type="number" name="price4" value="<%= price.price4 %>"></td>
+                <td><input type="number" name="price5" value="<%= price.price5 %>"></td>
+            </tr>
         </table>
+
+        <button type="submit">Update Prices</button>
     </form>
-    <script src="/listing_price.js"></script>
 </body>
